@@ -530,12 +530,11 @@ export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
   attributes: {
     photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
-    about: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'name'>;
     song: Schema.Attribute.Relation<'manyToOne', 'api::song.song'>;
-    chart: Schema.Attribute.Relation<'manyToOne', 'api::chart.chart'>;
     imgback: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     albums: Schema.Attribute.Relation<'oneToMany', 'api::album.album'>;
+    about: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -545,34 +544,6 @@ export interface ApiArtistArtist extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::artist.artist'>;
-  };
-}
-
-export interface ApiChartChart extends Struct.CollectionTypeSchema {
-  collectionName: 'charts';
-  info: {
-    singularName: 'chart';
-    pluralName: 'charts';
-    displayName: 'Chart';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    imgalbum: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    slug: Schema.Attribute.UID<'title'>;
-    genres: Schema.Attribute.Relation<'oneToMany', 'api::genre.genre'>;
-    artists: Schema.Attribute.Relation<'oneToMany', 'api::artist.artist'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::chart.chart'>;
   };
 }
 
@@ -589,7 +560,6 @@ export interface ApiGenreGenre extends Struct.CollectionTypeSchema {
   attributes: {
     genero: Schema.Attribute.String;
     song: Schema.Attribute.Relation<'manyToOne', 'api::song.song'>;
-    chart: Schema.Attribute.Relation<'manyToOne', 'api::chart.chart'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -608,6 +578,7 @@ export interface ApiSongSong extends Struct.CollectionTypeSchema {
     singularName: 'song';
     pluralName: 'songs';
     displayName: 'Song';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -622,6 +593,7 @@ export interface ApiSongSong extends Struct.CollectionTypeSchema {
     artists: Schema.Attribute.Relation<'oneToMany', 'api::artist.artist'>;
     album: Schema.Attribute.Relation<'manyToOne', 'api::album.album'>;
     genres: Schema.Attribute.Relation<'oneToMany', 'api::genre.genre'>;
+    linkyt: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1011,7 +983,6 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::album.album': ApiAlbumAlbum;
       'api::artist.artist': ApiArtistArtist;
-      'api::chart.chart': ApiChartChart;
       'api::genre.genre': ApiGenreGenre;
       'api::song.song': ApiSongSong;
       'admin::permission': AdminPermission;

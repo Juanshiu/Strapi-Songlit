@@ -26,9 +26,6 @@
     "name": {
       "type": "string"
     },
-    "about": {
-      "type": "blocks"
-    },
     "slug": {
       "type": "uid",
       "targetField": "name"
@@ -39,27 +36,25 @@
       "target": "api::song.song",
       "inversedBy": "artists"
     },
-    "chart": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::chart.chart",
-      "inversedBy": "artists"
-    },
     "imgback": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "albums": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::album.album",
       "mappedBy": "artists"
+    },
+    "about": {
+      "type": "richtext"
     }
   }
 }

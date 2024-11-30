@@ -19,12 +19,6 @@
       "relation": "manyToOne",
       "target": "api::song.song",
       "inversedBy": "genres"
-    },
-    "chart": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::chart.chart",
-      "inversedBy": "genres"
     }
   }
 }

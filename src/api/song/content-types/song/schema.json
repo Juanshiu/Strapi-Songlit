@@ -4,7 +4,8 @@
   "info": {
     "singularName": "song",
     "pluralName": "songs",
-    "displayName": "Song"
+    "displayName": "Song",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,14 +23,15 @@
       "targetField": "title"
     },
     "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "date": {
       "type": "date"
@@ -54,6 +56,9 @@
       "relation": "oneToMany",
       "target": "api::genre.genre",
       "mappedBy": "song"
+    },
+    "linkyt": {
+      "type": "string"
     }
   }
 }
